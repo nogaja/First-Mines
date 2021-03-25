@@ -1,6 +1,6 @@
 body{
     text-align:center;
-    color:black;
+    /* color:black; */
    
 }
 
@@ -10,20 +10,35 @@ body{
     text-align: center;
     font-size: 1.5em;
 }
-  
-.btn{
-
+btn {
+    background-color: black;
+    font-family: tahoma;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px ;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 7px;
+  } 
+/* .btn{
     cursor:pointer;
-}
+} */
 
 table{
     margin: auto;
 }
-
+/* 
 .hide{
-    color: white;
-}
+   color: white;
+
+} */
+
 .hide span{
-    display: none;
+    visibility: hidden;
 }
 

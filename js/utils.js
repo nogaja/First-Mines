@@ -2,21 +2,22 @@
 
 
 
-function printMat(mat, selector) {
+function  renderBoard(mat, selector) {
     var strHTML = '<table border="1"><tbody>';
     for (var i = 0; i < mat.length; i++) {
         strHTML += '<tr>';
         for (var j = 0; j < mat[0].length; j++) {
             var cell = mat[i][j];
             var className = 'cell cell' + i + '-' + j;
-            strHTML += `<td class="${className}"
+            strHTML += `<td oncontextmenu= "cellMarked(this , ${i} , ${j}, event)" class="${className}"
             data-i="${i}" data-j="${j}"
             onclick="cellClicked(this , ${i} , ${j}, event)"
-            ><btn onclick= "cellMarked(this , ${i} , ${j}, event)"></btn><span>${cell}</span></td>`
+            ><span>${cell}</span></td>`
         }
         strHTML += '</tr>'
     }
     strHTML += '</tbody></table>';
+    // console.log(strHTML)
     var elContainer = document.querySelector(selector);
     elContainer.innerHTML = strHTML;
 }
@@ -42,7 +43,7 @@ function getRandomColor() {
 }
 
 // location such as: {i: 2, j: 7}
-function countAllPossibleNeig(location, board) {
+function countAllPossibleNeig(location, board,show) {
     var count = 0;
     for (var i = location.i - 1; i <= location.i + 1; i++) {
         if (i < 0 || i > board.length - 1) continue;
@@ -51,6 +52,11 @@ function countAllPossibleNeig(location, board) {
             if (j < 0 || j > board[0].length - 1) continue;
             var cell = board[i][j]
             if (cell === MINE) count++
+            if(show) {
+                var elCell = document.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+                elCell.classList.remove('hide')
+            }
+            
         }
     }
     return count
