@@ -35,7 +35,7 @@ function init() {
     gGame.secsPassed = 0;
     gBoard = buildBoard(gLevel.SIZE, gLevel.MINES);
     renderBoard(gBoard, '.board-container')
-    // clearInterval(gInterval)
+    clearInterval(gInterval)
     var timer = document.querySelector('p span')
     timer.innerText = '00:00'
 }
@@ -83,53 +83,59 @@ function renderBoard(board, selector) {
 
 
 function cellClicked(elCell, i, j, ev) {
-   
+    checkEndGame()
+
     var cell = gBoard[i][j]
 
     if (!gGame.isOn) {
+        gInterval = setInterval(myTimer,1000)
         cell.isShown = true
-        gGame.shownCount += 1
+        gGame.shownCount++
         gGame.isOn = true
         elCell.classList.add('shown')
         createMines()
-        var toOpen=expandShown(i, j)
-        for(var d=0 ; d<toOpen.length; d++){
+        var toOpen = expandShown(i, j)
+        for (var d = 0; d < toOpen.length; d++) {
             var pos = toOpen[d]
             var i = pos.i
             var j = pos.j
-            if(gBoard[i][j].isMine) continue
+            if (gBoard[i][j].isMine) continue
             var elCell = document.querySelector(`.cell${i}-${j}`)
-            cellClicked(elCell,i,j)
+            cellClicked(elCell, i, j)
         }
         return;
     }
-    
+
 
     if (cell.isMine && !cell.isShown) {
         elCell.innerText = MINE
         cell.isShown = true
+        // maybe change later:
+        checkEndGame(cell.isMine)
         return;
-        // showCount ?
+        
 
     } else if (!cell.isMine && !cell.isShown) {
         cell.minesAroundCount = setMinesNegsCount(i, j)
         cell.isShown = true;
         elCell.innerText = cell.minesAroundCount
-        gGame.shownCount += 1
+        gGame.shownCount++
         if (cell.minesAroundCount === 0) {
+            elCell.innerText = ' ';
             var toOpen = expandShown(i, j)
-            for(var d=0 ; d<toOpen.length; d++){
+            for (var d = 0; d < toOpen.length; d++) {
                 var pos = toOpen[d]
                 var i = pos.i
                 var j = pos.j
-                if(gBoard[i][j].isMine) continue
+                if (gBoard[i][j].isMine) continue
                 var elCell = document.querySelector(`.cell${i}-${j}`)
-                cellClicked(elCell,i,j)
+                cellClicked(elCell, i, j)
             }
         }
     }
     elCell.classList.add('shown')
 }
+// renderBoard(gBoard ,'.board-container')
 
 function setMinesNegsCount(i, j) {
     var mineNeigs = countAllPossibleNeig({ i: i, j: j }, gBoard)
@@ -156,6 +162,23 @@ function expandShown(i, j) {
     var show = true;
     var res = countAllPossibleNeig({ i: i, j: j }, gBoard, show)
     return res
+}
+
+function checkEndGame(mine) {
+    if (gGame.shownCount === (gLevel.SIZE ** 2) - gLevel.MINES) {
+        console.log('victory!!!')
+        clearInterval(gInterval)
+    }else if (mine){
+        console.log ('You lost...Try again')
+        clearInterval(gInterval)
+    } 
+}
+
+function myTimer(){
+    gGame.secsPassed++
+    var timer = document.querySelector('p span')
+    timer.innerText = ` ${gGame.secsPassed}`
+
 }
 
 
