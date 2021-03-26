@@ -25,18 +25,13 @@ btn {
     cursor: pointer;
     border-radius: 7px;
   } 
-/* .btn{
-    cursor:pointer;
-} */
 
 table{
     margin: auto;
 }
-/* 
-.hide{
-   color: white;
-
-} */
+.shown{
+    background-color: blanchedalmond;
+}
 
 .hide span{
     visibility: hidden;

@@ -2,35 +2,55 @@
 
 const MINE = '🎇';
 var gMines = [];
-var gFirstCell = [];
 
 
 
-function createMines(gFirstCell) {
+
+function createMines() {
+    var emptyCells = getEmptyCells(gBoard)
     while (gMines.length < gLevel.MINES) {
+        if (!emptyCells.length) return
+        var cell = emptyCells[getRandomIntInclusive(0, emptyCells.length - 1)]
+        gMines.push(cell)
+        // console.log('cell' , cell)
+        var emptyCellIdx = getCellIdx(cell, emptyCells);
+        // console.log('emptyCellIdx',emptyCellIdx)
+        emptyCells.splice(emptyCellIdx, 1)
+        // console.log('emptyCells',emptyCells)
+        // console.log('gMines' , gMines)
+    }
+    createMine()
+}
 
-        var row = getRandomIntInclusive(0, gLevel.SIZE - 1)
-        var col = getRandomIntInclusive(0, gLevel.SIZE - 1)
-        var exist = getMineIdx({ i: row, j: col })
-        // bug check also if does'nt exist already
-        if (row !== gFirstCell[0] || col !== gFirstCell[1] && !exist) {
-            gMines.push({ i: row, j: col })
-            createMine(row, col)
-        }
+function createMine() {
+    for (var i = 0; i < gMines.length; i++) {
+        var row = gMines[i].i
+        var col = gMines[i].j
+        gBoard[row][col].isMine = true
     }
 }
 
-function createMine(i, j) {
-    gBoard[i][j] = MINE
-    createCells(gBoard, gLevel.SIZE)
-    renderCell({ i: i, j: j }, MINE)
+function getEmptyCells(board) {
+    var emptyCells = [];
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[0].length; j++) {
+            var currCellPos = { i, j };
+            var currCell = board[i][j];
+            if (!currCell.isMine && !currCell.isShown) {
+                emptyCells.push(currCellPos)
+            }
+        }
+    }
+    return emptyCells;
 }
 
-function getMineIdx(cell) {
-    for (var i = 0; i < gMines.length; i++) {
-        if (gMines[i].i === cell.i && gMines[i].j === cell.j) {
+
+function getCellIdx(cell, emptyCells) {
+    for (var i = 0; i < emptyCells.length; i++) {
+        if (emptyCells[i].i === cell.i && emptyCells[i].j === cell.j) {
             return i
         }
+
     }
-    return null
 }
+
