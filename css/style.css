@@ -1,7 +1,12 @@
 body{
     text-align:center;
-    /* color:black; */
-   
+    background-color: rgb(179, 135, 135);
+    font-family: tahoma;
+
+}
+
+h2{
+    color: rgb(92, 45, 45);
 }
 
 .cell {
@@ -10,30 +15,65 @@ body{
     text-align: center;
     font-size: 1.5em;
 }
+
+p {
+    color:blanchedalmond;
+    border: 2px dashed  rgb(131, 54, 54);
+    display: inline-block;
+    margin-top: 20px;
+    padding: 7px;
+    width: 25%;
+}
+
 btn {
-    background-color: black;
-    font-family: tahoma;
+    background-color: rgb(145, 89, 89);
     border: none;
-    color: white;
+    color:  blanchedalmond;
     padding: 15px 32px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
     margin: 4px ;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     cursor: pointer;
     border-radius: 7px;
-  } 
+} 
+
+/* btn:hover {
+    border:1px blanchedalmond solid;
+} */
 
 table{
     margin: auto;
+    color: rgb(92, 45, 45);
 }
+
 .shown{
     background-color: blanchedalmond;
 }
 
-.hide span{
-    visibility: hidden;
+.lost {
+    background-color: rgb(131, 54, 54);
+}
+
+.lives{
+    border: 2px dashed  rgb(131, 54, 54);
+    color:blanchedalmond;
+    font-family: tahoma;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 7px;
+    width: 25%;
+
+}
+
+.lives span{
+    color:blanchedalmond
+}
+
+.hints img{
+  height: 100px;
 }
 

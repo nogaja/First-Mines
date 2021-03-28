@@ -12,9 +12,9 @@
 <body onload="init()" oncontextmenu="return false;">
     <div class="panel">
         <h2>Score: <span>0</span></h2>
-        <p>Time: <span>00:00</span>
-            <btn>x</btn>
-        </p>
+        <btn class="face" onclick="init()">x</btn>
+        <p>TIME: <span>00:00</span></p>
+
         <div class="levels">
             <btn onclick="changeLevel(4,2)">Easy</btn>
             <btn onclick="changeLevel(8,12)">Medium</btn>
@@ -22,6 +22,12 @@
         </div>
     </div>
     <div class="board-container"></div>
+    <div class="lives"><span>3</span> LIVES LEFT</div>
+    <div class="hints">
+        <img class="hint1" onclick="getHint(this)" src="images/light-off.png" /></span>
+        <img class="hint2" onclick="getHint(this)" src="images/light-off.png" /></span>
+        <img class="hint3" onclick="getHint(this)" src="images/light-off.png" /></span>
+    </div>
     <script src="js/utils.js"></script>
     <script src="js/game.js"></script>
     <script src="js/mines.js"></script>

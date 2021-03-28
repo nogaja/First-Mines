@@ -15,16 +15,9 @@ function countAllPossibleNeig(location, board, show) {
             if (j < 0 || j > board[0].length - 1) continue;
             var cell = board[i][j]
             if (cell.isMine === true) count++
-
             if (show) {
                toBeOpened.push({ i: i, j: j })
             }
-            // var elCell = document.querySelector(`.cell${location.i}-${location.j}`);
-            // elCell.innerText = ''
-            // elCell.classList.add('shown')
-            // gGame.shownCount += 1
-            // countAllPossibleNeig({i: board[i],j:board[j]},gBoard, show)
-
         }
     }
     if(show) return toBeOpened

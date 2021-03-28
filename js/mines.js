@@ -1,9 +1,7 @@
 'use strict'
 
-const MINE = '🎇';
+const MINE = '💣';
 var gMines = [];
-
-
 
 
 function createMines() {
@@ -12,12 +10,8 @@ function createMines() {
         if (!emptyCells.length) return
         var cell = emptyCells[getRandomIntInclusive(0, emptyCells.length - 1)]
         gMines.push(cell)
-        // console.log('cell' , cell)
         var emptyCellIdx = getCellIdx(cell, emptyCells);
-        // console.log('emptyCellIdx',emptyCellIdx)
         emptyCells.splice(emptyCellIdx, 1)
-        // console.log('emptyCells',emptyCells)
-        // console.log('gMines' , gMines)
     }
     createMine()
 }
